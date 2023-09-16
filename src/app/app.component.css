@@ -98,7 +98,7 @@ body {
   margin-bottom: 0.6em;
   padding: 0.5em 1em;
   display: grid;
-  grid-template-columns: 1fr 4fr 2fr 1fr 1fr;
+  grid-template-columns: 1fr 6fr 2fr 1fr 1fr;
 }
 .sublist-content .sublist-header {
   grid-column: span 2; /* Merge from the first column to the second column */
