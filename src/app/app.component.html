@@ -1,30 +1,20 @@
 <div class="wrapper">
   <div class="title">
-    <h3 style="font-weight: bold;">MY TO-DO LIST</h3>
+    <h2 style="font-weight: bold;">MY TO-DO LIST</h2>
   </div>
   <div class="container">
-    <!-- <form> -->
     <div class="sub-container">
-      <!-- Budget -->
       <div class="to-do-name-container">
-        <h3>Nhắc nhở</h3>
+        <h3 class="header" style="font-weight: bold;">Nhắc nhở</h3>
         <input type="text" id="to-do-name" [(ngModel)]="todo.name" #name="ngModel" name="name"
           placeholder="Nhập tên nhắc nhở" required />
-        <p class="error" id="to-do-name-error" *ngIf="name.invalid && name.touched">
-          * Vui lòng nhập tên công việc
-        </p>
       </div>
-      <!-- Expenditure -->
       <div class="to-do-date-container">
-        <h3>Thời gian</h3>
+        <h3 class="header" style="font-weight: bold;">Thời gian</h3>
         <input type="date" class="to-do-date" id="to-do-date" [(ngModel)]="todo.date" #date="ngModel" name="date"
-          placeholder="Chọn ngày thực hiện" required/>
-        <p class="error" id="to-do-date-error" *ngIf="date.invalid && date.touched">
-          * Vui lòng chọn thời gian
-        </p>
+          placeholder="Chọn ngày thực hiện" required />
       </div>
     </div>
-    <!-- </form> -->
     <div *ngIf="date.invalid || name.invalid">
       <button class="submit submit-btn disabled" id="save-button" (click)="saveToDo()">Lưu nhắc nhở</button>
       <ng-template #enableButton></ng-template>
@@ -33,21 +23,6 @@
       <button class="submit submit-btn" id="save-button" (click)="saveToDo()">Lưu nhắc nhở</button>
       <ng-template #enableButton></ng-template>
     </div>
-    <!-- Output -->
-    <!-- <div class="output-container flex-space">
-      <div>
-        <p>Total Budget</p>
-        <span id="amount">0</span>
-      </div>
-      <div>
-        <p>Expenses</p>
-        <span id="expenditure-value">0</span>
-      </div>
-      <div>
-        <p>Balance</p>
-        <span id="balance-amount">0</span>
-      </div>
-    </div> -->
   </div>
   <!-- List -->
   <div class="list" style="margin-top: 30px;">
@@ -62,15 +37,15 @@
       <div class="sublist-content flex-space" *ngIf="todo.status">
         <input type="checkbox" checked (change)="updateStatus(i)" />
         <p class=" to-do-name-list complete">{{todo.name}}</p>
-        <p class="to-do-date-list complete">{{todo.date}}</p>
-        <button class="fas fa-pen edit" style="font-size: 1.1em;" (click)="getAToDo(i)"></button>
+        <p class="to-do-date-list complete">{{todo.date | date:"dd-MM-yyyy"}}</p>
+        <button class="fas fa-pen edit" style="font-size: 1.1em;" (click)="getToDo(i)"></button>
         <button class="fas fa-trash delete" style="font-size: 1.1em;" (click)="deleteToDo(i)"></button>
       </div>
       <div class="sublist-content flex-space" *ngIf="!todo.status">
         <input type="checkbox" (change)="updateStatus(i)" />
         <p class="to-do-name-list">{{todo.name}}</p>
-        <p class="to-do-date-list">{{todo.date}}</p>
-        <button class="fas fa-pen edit" style="font-size: 1.1em;" (click)="getAToDo(i)"></button>
+        <p class="to-do-date-list">{{todo.date | date:"dd-MM-yyyy"}}</p>
+        <button class="fas fa-pen edit" style="font-size: 1.1em;" (click)="getToDo(i)"></button>
         <button class="fas fa-trash delete" style="font-size: 1.1em;" (click)="deleteToDo(i)"></button>
       </div>
     </div>

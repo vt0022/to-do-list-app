@@ -10,7 +10,7 @@ export class AppComponent implements OnInit {
   title = 'to-do-todoList-app';
   todoList: ToDo[] = [];
   todo = new ToDo();
-  index?: number;
+  index?: number = undefined;
 
   constructor() {}
 
@@ -18,10 +18,25 @@ export class AppComponent implements OnInit {
     this.getAllToDoes();
   }
 
+  getAllToDoes() {
+    let value = localStorage.getItem('todo');
+    if (value != '' && value != null && typeof value != 'undefined') {
+      this.todoList = JSON.parse(value!);
+    }
+  }
+
+  getToDo(index: number) {
+    let value = localStorage.getItem('todo');
+    if (value != '' && value != null && typeof value != 'undefined') {
+      this.index = index; // Pass index of the to-do needed to be updated
+      this.todo = JSON.parse(value!)[index];
+    }
+  }
+
   saveToDo() {
     // Check if new to do
-    if (!this.index) {
-      // New to-do
+    if (this.index == undefined) {
+      // Default is incomplete
       this.todo.status = false;
       this.todoList.push(this.todo);
     } else {
@@ -41,21 +56,6 @@ export class AppComponent implements OnInit {
 
   save() {
     localStorage.setItem('todo', JSON.stringify(this.todoList));
-  }
-
-  getAllToDoes() {
-    let value = localStorage.getItem('todo');
-    if (value != '' && value != null && typeof value != 'undefined') {
-      this.todoList = JSON.parse(value!);
-    }
-  }
-
-  getAToDo(index: number) {
-    let value = localStorage.getItem('todo');
-    if (value != '' && value != null && typeof value != 'undefined') {
-      this.index = index; // Pass index of the to-do needed to be updated
-      this.todo = JSON.parse(value!)[index];
-    }
   }
 
   updateStatus(index: number) {
